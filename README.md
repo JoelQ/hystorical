@@ -32,7 +32,7 @@ Hystorical allows you to find which entries were current at a particular point i
 
 ```ruby
 date = Date.new(2012, 01, 10)
-hystorical_entries = Hystorical.current_on(@subscriptions, date)
+Hystorical.current_on(@subscriptions, date)
 # => returns enumerable collection of objects that were current on January 10th
 ```
 
