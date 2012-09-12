@@ -16,6 +16,7 @@ Or install it yourself as:
 
     $ gem install hystorical
 
+
 ## Usage
 
 Hystorical acts as a decorator to your models. You pass in your model into the constructor and can then call Hystorical's methods on it.
@@ -45,9 +46,10 @@ current_entries_on_jan_10 = hystorical_entries.current_at(Date.new(2012, 01, 10)
 Archiving an item sets its `end_date` to today. The item is no longer current.
 ```ruby
 hystorical_entries = Hystorical.new(Entry)
-current_entry = hystorical_entries.current.first
-current_entry.archive
-# => hystorical_entries.current no longer contains current_entry
+hystorical_entries.current.each do |entry|
+  entry.archive
+end
+# => archives every current entry in the system
 ```
 
 ### archive_or_delete
@@ -65,9 +67,10 @@ In this example, the user has changed the order several times on the same day as
 
 ```ruby
 hystorical_entries = Hystorical.new(Entry)
-current_entry = hystorical_entries.current.first
-current_entry.archive_or_delete
-# => if current_entry's start_date is today, it will be deleted. Otherwise it is archived
+hystorical_entries.current.each do |entry|
+  entry.archive
+end
+# => if entry's start_date is today, it will be deleted. Otherwise it is archived
 ```
 
 ### Other methods
