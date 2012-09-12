@@ -68,7 +68,7 @@ In this example, the user has changed the order several times on the same day as
 ```ruby
 hystorical_entries = Hystorical.new(Entry)
 hystorical_entries.current.each do |entry|
-  entry.archive
+  entry.archive_or_delete
 end
 # => if entry's start_date is today, it will be deleted. Otherwise it is archived
 ```
