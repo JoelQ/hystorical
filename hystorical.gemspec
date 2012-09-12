@@ -3,9 +3,9 @@ require File.expand_path('../lib/hystorical/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Joel Quenneville"]
-  gem.email         = ["joel.quenneville@collegeplus.org"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.email         = ["joel.quen@gmail.com"]
+  gem.description   = %q{Hystorical is a simple solution for managing explicit historical datasets}
+  gem.summary       = %q{Hystorical is a simple solution for managing explicit historical datasets}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
