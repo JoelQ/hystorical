@@ -35,7 +35,6 @@ current_entries = hystorical_entries.current
 
 Hystorical allows you to find which entries were current at a particular point in time.
 
-Hystorical returns the current item(s)
 ```ruby
 hystorical_entries = Hystorical.new(Entry)
 current_entries_on_jan_10 = hystorical_entries.current_at(Date.new(2012, 01, 10))
@@ -72,7 +71,7 @@ current_entry.archive_or_delete
 ```
 
 ### Other methods
-What about other methods you have defined on your object? Since Hystorical is a decorator, you can use all the methods that were available to your original object.
+What about other methods you have defined on your object? Since Hystorical is just a decorator, you can use all the methods that were available to your original object.
 
 ```ruby
 hystorical_entries = Hystorical.new(Entry)
