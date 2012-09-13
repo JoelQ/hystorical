@@ -1,3 +1,6 @@
+require 'date'
+require 'ruby_hystorical'
+
 describe RubyHystorical do
   class HistoricalObjet
     attr_accessor :start_date, :end_date
