@@ -31,6 +31,21 @@ describe RubyHystorical do
         RubyHystorical.current(collection2).should eq [obj6]
       end
     end
+  end
 
+  describe ".current_on" do
+    let(:date) { Date.new(2012, 9, 1) }
+
+    context "when attributes are accessed via []" do
+      it "should return the current object" do
+        RubyHystorical.current_on(collection, date).should eq [obj2]
+      end
+    end
+
+    context "when attributes are accessed via ." do
+      it "should return the current object" do
+        RubyHystorical.current_on(collection2, date).should eq [obj5]
+      end
+    end
   end
 end
