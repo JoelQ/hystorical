@@ -4,17 +4,17 @@ module Hystorical
 
   def self.delegate_class(collection)
     if collection.class == ActiveRecord::Relation
-      Hystorical::ARRelation
+      return Hystorical::ARRelation
     else
-      Hystorical::RubyCollection
+      return Hystorical::RubyCollection
     end
   end
 
   def self.current(collection)
-    delegate_class.current(collection)
+    delegate_class(collection).current(collection)
   end
 
   def self.current_on(collection, date)
-    delegate_class.current_on(collection, date)
+    delegate_class(collection).current_on(collection, date)
   end
 end
