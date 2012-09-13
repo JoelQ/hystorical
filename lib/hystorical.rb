@@ -1,4 +1,5 @@
 require 'hystorical/ruby_collection'
+require 'hystorical/ar_relation'
 module Hystorical
 
   def self.delegate_class

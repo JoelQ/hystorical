@@ -16,5 +16,6 @@ Gem::Specification.new do |gem|
   gem.version       = Hystorical::VERSION
 
   gem.add_development_dependency "rspec"
-  gem.add_development_dependency "supermodel"
+  gem.add_development_dependency "sqlite3"
+  gem.add_development_dependency "with_model"
 end
