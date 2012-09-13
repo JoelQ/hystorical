@@ -1,7 +1,6 @@
-require 'date'
-require 'ruby_hystorical'
+require 'spec_helper'
 
-describe RubyHystorical do
+describe Hystorical::RubyCollection do
   class HistoricalObjet
     attr_accessor :start_date, :end_date
 
@@ -25,13 +24,13 @@ describe RubyHystorical do
   describe ".current" do
     context "when attributes are accessed via []" do
       it "should return the current object" do
-        RubyHystorical.current(collection).should eq [obj3]
+        Hystorical::RubyCollection.current(collection).should eq [obj3]
       end
     end
 
     context "when attributes are accessed via ." do
       it "should return the current object" do
-        RubyHystorical.current(collection2).should eq [obj6]
+        Hystorical::RubyCollection.current(collection2).should eq [obj6]
       end
     end
   end
@@ -41,13 +40,13 @@ describe RubyHystorical do
 
     context "when attributes are accessed via []" do
       it "should return the current object" do
-        RubyHystorical.current_on(collection, date).should eq [obj2]
+        Hystorical::RubyCollection.current_on(collection, date).should eq [obj2]
       end
     end
 
     context "when attributes are accessed via ." do
       it "should return the current object" do
-        RubyHystorical.current_on(collection2, date).should eq [obj5]
+        Hystorical::RubyCollection.current_on(collection2, date).should eq [obj5]
       end
     end
   end
