@@ -10,4 +10,8 @@ class Hystorical
   def self.current(collection)
     delegate_class.current(collection)
   end
+
+  def self.current_on(collection, date)
+    delegate_class.current_on(collection, date)
+  end
 end
