@@ -2,8 +2,16 @@ require 'spec_helper'
 
 describe Hystorical do
   describe ".delegate_class" do
-    it "should return RubyHystorical" do
-      Hystorical.delegate_class.should be Hystorical::RubyCollection
+    context "when ActiveRecord::Relation" do
+      it "should return RubyHystorical" do
+        collection = double("ActiveRecord::Relation").stub(:class) {ActiveRecord::Relation}
+        Hystorical.delegate_class(collection).should be Hystorical::ARRelation
+      end
+    end
+    context "when not ActiveRecord:Relation" do
+      it "should return RubyHystorical" do
+        Hystorical.delegate_class(stub).should be Hystorical::RubyCollection
+      end
     end
   end
 

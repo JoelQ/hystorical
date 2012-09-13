@@ -2,9 +2,12 @@ require 'hystorical/ruby_collection'
 require 'hystorical/ar_relation'
 module Hystorical
 
-  def self.delegate_class
-    Hystorical::RubyCollection
-    # add conditional to determine which subclass to use once other strategies are used (i.e. ActiveRecord)
+  def self.delegate_class(collection)
+    if collection.class == ActiveRecord::Relation
+      Hystorical::ARRelation
+    else
+      Hystorical::RubyCollection
+    end
   end
 
   def self.current(collection)
