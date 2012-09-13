@@ -28,7 +28,7 @@ Hystorical.current(@subscriptions)
 
 ### current_on
 
-Hystorical allows you to find which entries were current at a particular point in time.
+Hystorical allows you to find which objects were current at a particular point in time.
 
 ```ruby
 date = Date.new(2012, 01, 10)
@@ -41,12 +41,44 @@ Hystorical.current_on(@subscriptions, date)
 
 ### Pure Ruby
 
-### Using Rails
 ```ruby
-subscriptions = Hystorical.current_on(@user.subscriptions, Jan 10)
-subscriptions.current
-subscriptions.current_on(Jan 10)
-current_subscriptions = Hystorical.new(@subscriptions, user_id: 1)
+Subscription = Struct.new(:start_date, :end_date)
+subscriptions = # collection of several Subscription objects
+
+Hystorical.current(subscriptions)
+# => returns enumerable collection of objects
+
+date = Date.new(2012, 01, 10)
+Hystorical.current_on(subscriptions, date)
+# => returns enumerable collection of objects that were current on January 10th
+```
+
+### Using Rails
+
+Hystorical accepts ActiveRecord::Relation collections. This means that all your scopes integrate fully with Hystorical.
+
+In a model
+```ruby
+class Subscription < ActiveRecord::Base
+  attr_accessible :user_id, :start_date, :end_date
+
+  def self.for_user(user_id)
+    where user_id: user_id
+  end
+
+  def self.user_subscription_count_on(user_id, date)
+    subscriptions = Subscription.for_user(user_id)
+    Hystorical.current subscriptions, date
+  end
+
+end
+```
+
+In a controller
+```ruby
+def index
+  @users_current_subscriptions = Hystorical.current Subscription.for_user(params[:user_id])
+end
 ```
 
 
