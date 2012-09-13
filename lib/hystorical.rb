@@ -1,7 +1,5 @@
-require 'ruby_collection'
+require 'hystorical/ruby_collection'
 module Hystorical
-
-  VERSION = "0.0.1.alpha"
 
   def self.delegate_class
     Hystorical::RubyCollection

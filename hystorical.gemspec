@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/hystorical', __FILE__)
-require File.expand_path('../lib/ruby_hystorical', __FILE__)
+require File.expand_path('../lib/hystorical/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Joel Quenneville"]
@@ -17,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = Hystorical::VERSION
 
   gem.add_development_dependency "rspec"
+  gem.add_development_dependency "supermodel"
 end
