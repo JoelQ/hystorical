@@ -16,10 +16,13 @@ describe Hystorical::ARRelation do
     end
   end
 
+  describe "current" do
+    let!(:obj1) { Subscription.create(user_id: 1, start_date: Date.new(2012, 9, 1), end_date: nil) }
+    let!(:obj2) { Subscription.create(user_id: 2, start_date: Date.new(2012, 9, 6), end_date: Date.new(2012, 9, 10)) }
+    let!(:obj3) { Subscription.create(user_id: 2, start_date: Date.new(2012, 9, 11), end_date: nil) }
 
-  it "should have ARRelation" do
-    Subscription.create(user_id: 1, end_date: Date.new(2012, 9, 5))
-    Subscription.create(user_id: 2, end_date: Date.new(2012, 9, 10))
-    raise Subscription.for_user(1).class.to_yaml
+    it "should return the current subscription" do
+      Hystorical.current(Subscription.for_user(2)).should eq [obj3]
+    end
   end
 end
