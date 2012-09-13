@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "hystorical"
   gem.require_paths = ["lib"]
   gem.version       = Hystorical::VERSION
+
+  gem.add_development_dependency "rspec"
 end
