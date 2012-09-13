@@ -1,6 +1,10 @@
 # Hystorical
 
-Hystorical is a simple solution for managing explicit historical datasets. Provided that your records have a `start_date` and `end_date`, Hystorical will take care figuring which records are currently active, which were active during a particular date range and managing the archiving of records.
+Hystorical is a simple solution for managing explicit historical datasets. Provided that your records have a `start_date` and `end_date`, Hystorical will take care figuring which records are currently active, which were active during a particular date range and managing the archiving of records. It makes the following assumptions:
+
+* Objects in the collection have `start_date` and `end_date` attributes
+* `start_date` and `end_date` return a ruby `Date` object
+* the start and end dates can be accessed via either `[]` method or the `.` operator
 
 ## Installation
 
@@ -15,7 +19,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install hystorical
-
 
 ## Usage
 
@@ -81,6 +84,12 @@ def index
 end
 ```
 
+## Philosophy
+This gem was created using TDD and README-driven development. The architecture was designed with a strong focus on modularity and extensibility. Using ruby's `Enumerable` methods to return current object was chosen because of it's great flexibility to adapt to all ruby projects. However, when working with large datasets stored in a relational database, using SQL would yield greater performance. Adding an adapter for ActiveRecord or any other ORM (such as DataMapper or Mongoid) is as simple as creating a new class that defines all the methods in the public api and adding a conditional in `Hystorical.delegate_class`.
+
+## TODO
+ * Add ability to search via SQL when passed `ActiveRecord::Relation`
+ * Add ability to pass in a block option that can further filter results
 
 ## Contributing
 
