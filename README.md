@@ -1,10 +1,11 @@
 # Hystorical
 
-Hystorical is a simple solution for managing explicit historical datasets. Provided that your records have a `start_date` and `end_date`, Hystorical will take care figuring which records are currently active, which were active during a particular date range and managing the archiving of records. It makes the following assumptions:
+Hystorical is a simple solution for managing historical datasets. Hystorical takes care of determining which objects are currently active or active on a particular day. It makes the following assumptions:
 
 * Objects in the collection have `start_date` and `end_date` attributes
 * `start_date` and `end_date` return a ruby `Date` object
-* the start and end dates can be accessed via either `[]` method or the `.` operator
+* Typically members of the collection will be objects or hashes, but anything that implements start_date and end_date via `[]` or `.` can be used.
+* Current objects have a `nil` end_date
 
 ## Installation
 
@@ -23,7 +24,7 @@ Or install it yourself as:
 ## Usage
 
 ### current
-Hystorical returns the current object which is determined as those with `nil` end_date
+Hystorical returns the current objects which is determined as objects with a end_date that returns `nil`
 ```ruby
 Hystorical.current(@subscriptions)
 # => returns enumerable collection of objects
@@ -71,7 +72,7 @@ class Subscription < ActiveRecord::Base
 
   def self.user_subscription_count_on(user_id, date)
     subscriptions = Subscription.for_user(user_id)
-    Hystorical.current subscriptions, date
+    Hystorical.current(subscriptions, date).count
   end
 
 end
