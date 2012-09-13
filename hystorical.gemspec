@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/hystorical/version', __FILE__)
+require File.expand_path('../lib/hystorical', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Joel Quenneville"]
