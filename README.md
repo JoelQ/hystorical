@@ -47,19 +47,21 @@ Hystorical.current_on(@subscriptions, date)
 
 ```ruby
 Subscription = Struct.new(:start_date, :end_date)
-subscriptions = # collection of several Subscription objects
+subscription1 = Subscription.new(Date.new(2012, 9, 1), Date.new(2012, 9, 10))
+subscription2 = Subscription.new(Date.new(2012, 9, 11), nil)
+subscriptions = [subscription1, subscription2]
 
 Hystorical.current(subscriptions)
-# => returns enumerable collection of objects
+# => returns [subscription2]
 
-date = Date.new(2012, 01, 10)
+date = Date.new(2012, 09, 8)
 Hystorical.current_on(subscriptions, date)
-# => returns enumerable collection of objects that were current on January 10th
+# => returns [subscription1]
 ```
 
 ### Using Rails
 
-Hystorical accepts ActiveRecord::Relation collections. This means that all your scopes integrate fully with Hystorical.
+Hystorical accepts ActiveRecord::Relation collections. This means that all your scopes integrate fully with Hystorical. In order to be optimized for larger datasets, Hystorical takes advantage of ActiveRecord::Relation methods to build a SQL query instead of using Enumerable methods when pass an instance of ActiveRecordRelation.
 
 In a model
 ```ruby
@@ -75,6 +77,10 @@ class Subscription < ActiveRecord::Base
     Hystorical.current(subscriptions, date).count
   end
 
+  def archive
+    update_attributes { end_date: Date.today }
+  end
+
 end
 ```
 
@@ -86,10 +92,9 @@ end
 ```
 
 ## Philosophy
-This gem was created using TDD and README-driven development. The architecture was designed with a strong focus on modularity and extensibility. Using ruby's `Enumerable` methods to return current object was chosen because of it's great flexibility to adapt to all ruby projects. However, when working with large datasets stored in a relational database, using SQL would yield greater performance. Adding an adapter for ActiveRecord or any other ORM (such as DataMapper or Mongoid) is as simple as creating a new class that defines all the methods in the public api and adding a conditional in `Hystorical.delegate_class`.
+This gem was created using TDD and README-driven development. The architecture was designed with a strong focus on modularity and extensibility. Using ruby's `Enumerable` methods to return current object was chosen because of it's great flexibility to adapt to all ruby projects. However, when working with large datasets stored in a relational database, using SQL would yield greater performance. An adapter was added for ActiveRecord, but extending this to another ORM (such as DataMapper or Mongoid) is as simple as creating a new class that defines all the methods in the public api and adding a conditional in `Hystorical.delegate_class`.
 
 ## TODO
- * Add ability to search via SQL when passed `ActiveRecord::Relation`
  * Add ability to pass in a block option that can further filter results
 
 ## Contributing
