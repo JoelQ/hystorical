@@ -1,4 +1,4 @@
-require 'ruby_hystorical'
+require 'ruby_collection'
 module Hystorical
 
   VERSION = "0.0.1.alpha"
