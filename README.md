@@ -91,6 +91,14 @@ def index
 end
 ```
 
+### Generator
+Hystorical comes with a generator that creates a migration to add `start_date` and `end_date` to the specified model.
+
+```
+$ rails g hystorical:dates Subscription
+$    create  db/migrate/20120917150948_add_start_date_end_date_to_subscriptions.rb
+```
+
 ## Philosophy
 This gem was created using TDD and README-driven development. The architecture was designed with a strong focus on modularity and extensibility. Using ruby's `Enumerable` methods to return current object was chosen because of it's great flexibility to adapt to all ruby projects. However, when working with large datasets stored in a relational database, using SQL would yield greater performance. An adapter was added for ActiveRecord, but extending this to another ORM (such as DataMapper or Mongoid) is as simple as creating a new class that defines all the methods in the public api and adding a conditional in `Hystorical.delegate_class`.
 
