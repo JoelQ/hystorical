@@ -35,7 +35,7 @@ describe Hystorical::RubyCollection do
       end
     end
 
-    context "description" do
+    context "filter block" do
       let(:obj5) { HistoricalObjet.new(:silver, Date.new(2012, 8, 27), nil) }
       it "should be filterable via a block" do
         Hystorical::RubyCollection.current collection2 do |sub|

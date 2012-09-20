@@ -4,7 +4,8 @@ module Hystorical
 
       def current(collection)
         collection.select do |obj|
-          end_date(obj).nil?
+          current = end_date(obj).nil?
+          block_given? ? (yield obj) && current : current
         end
       end
 
