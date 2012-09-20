@@ -59,5 +59,14 @@ describe Hystorical::RubyCollection do
         Hystorical::RubyCollection.current_on(collection2, date).should eq [obj5]
       end
     end
+
+    context "filter block" do
+     let(:obj6) { HistoricalObjet.new(:gold, Date.new(2012, 9, 5), Date.new(2012, 9, 4)) }
+      it "should be filterable via a block" do
+        Hystorical::RubyCollection.current_on collection2, date do |sub|
+          sub.type == :silver
+        end.should eq [obj5]
+      end
+    end
   end
 end

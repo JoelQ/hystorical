@@ -11,7 +11,8 @@ module Hystorical
 
       def current_on(collection, date)
         collection.select do |obj|
-          start_date(obj) <= date && end_date(obj) >= date
+          current = (start_date(obj) <= date) && (end_date(obj) >= date)
+          block_given? ? (yield obj) && current : current
         end
       end
 
