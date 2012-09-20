@@ -99,11 +99,17 @@ $ rails g hystorical:dates Subscription
 $    create  db/migrate/20120917150948_add_start_date_end_date_to_subscriptions.rb
 ```
 
+## Filtering
+
+You can filter a dataset by passing in a block. This works similarly to Enumerable's `select` method.
+
+```ruby
+Hystorical.current subscriptions { |subscription| subscription.type == :gold }
+```
+
 ## Philosophy
 This gem was created using TDD and README-driven development. The architecture was designed with a strong focus on modularity and extensibility. Using ruby's `Enumerable` methods to return current object was chosen because of it's great flexibility to adapt to all ruby projects. However, when working with large datasets stored in a relational database, using SQL would yield greater performance. An adapter was added for ActiveRecord, but extending this to another ORM (such as DataMapper or Mongoid) is as simple as creating a new class that defines all the methods in the public api and adding a conditional in `Hystorical.delegate_class`.
 
-## TODO
- * Add ability to pass in a block option that can further filter results
 
 ## Contributing
 
