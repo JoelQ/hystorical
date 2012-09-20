@@ -3,18 +3,24 @@ module Hystorical
     class << self
 
       def current(collection)
-        collection.select { |obj| obj.respond_to?(:[]) ? obj[:end_date].nil? : obj.end_date.nil? }
+        collection.select do |obj|
+          current = get_attr(obj, :end_date).nil?
+          block_given? ? (yield obj) && current : current
+        end
       end
 
       def current_on(collection, date)
         collection.select do |obj|
-          if obj.respond_to?(:[])
-            obj[:start_date] <= date && obj[:end_date] >= date
-          else
-            obj.start_date <= date && obj.end_date >= date
-          end
+          current = (get_attr(obj, :start_date) <= date) && (get_attr(obj, :end_date) >= date)
+          block_given? ? (yield obj) && current : current
         end
       end
+
+      private
+      def get_attr(obj, attribute)
+        obj.respond_to?(:[]) ? obj[attribute] : obj.send(attribute)
+      end
+
     end
   end
 end
