@@ -104,9 +104,7 @@ $    create  db/migrate/20120917150948_add_start_date_end_date_to_subscriptions.
 You can filter a dataset by passing in a block. This works similarly to Enumerable's `select` method.
 
 ```ruby
-Hystorical.current(subscriptions) do |subscription|
-  subscription.type == :gold
-end
+Hystorical.current subscriptions { |subscription| subscription.type == :gold }
 ```
 
 ## Philosophy
